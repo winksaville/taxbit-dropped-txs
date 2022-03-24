@@ -355,7 +355,7 @@ dependencies = [
 
 [[package]]
 name = "taxbit-dropped-txs"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "assert_cmd",
  "csv",

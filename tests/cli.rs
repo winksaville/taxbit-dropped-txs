@@ -37,3 +37,19 @@ fn test_3_recs() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
+
+#[test]
+//#[cfg(not(tarpaulin))]
+fn test_4_recs() -> Result<(), Box<dyn Error>> {
+    let mut cmd = Command::cargo_bin(APP_NAME)?;
+
+    cmd.arg("testdata/4.tbr.csv");
+    cmd.arg("testdata/4.with-invalid.tber.csv");
+
+    // This should probably be 1 eventually
+    cmd.assert()
+        .code(predicate::eq(0))
+        .stdout(predicate::str::starts_with(format!("Dropped: 0")));
+
+    Ok(())
+}

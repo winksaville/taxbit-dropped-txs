@@ -70,4 +70,14 @@ mod test {
 
         assert_eq!(dropped, 0);
     }
+
+    #[test]
+    fn test_find_dropped_transactions_with_invalid() {
+        let dropped =
+            find_dropped_transactions("testdata/4.tbr.csv", "testdata/4.with-invalid.tber.csv")
+                .unwrap();
+
+        // This should probably be 1 eventually
+        assert_eq!(dropped, 0);
+    }
 }
