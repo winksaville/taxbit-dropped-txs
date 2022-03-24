@@ -368,7 +368,7 @@ dependencies = [
 [[package]]
 name = "taxbit-export-rec"
 version = "0.3.0"
-source = "git+https://github.com/winksaville/taxbit-export-rec#559ceb5b0e1f363bce2e95af12170e0179ec30c9"
+source = "git+https://github.com/winksaville/taxbit-export-rec#3b5d86194051020c16eb08c88216dae6ced48167"
 dependencies = [
  "csv",
  "dec-utils",
@@ -384,7 +384,7 @@ dependencies = [
 [[package]]
 name = "taxbitrec"
 version = "0.4.0"
-source = "git+https://github.com/winksaville/taxbitrec#f6a86595323fd9e17583c358a07c434cf6105edb"
+source = "git+https://github.com/winksaville/taxbitrec#89ddf5f43844e91b6b4ace1571fe8adcd7646538"
 dependencies = [
  "csv",
  "dec-utils",

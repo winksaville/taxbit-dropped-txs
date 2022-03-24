@@ -25,7 +25,10 @@ where
     let mut rec_a = Vec::<T>::new();
 
     for entry in csv_reader.deserialize() {
-        let rec: T = entry?;
+        let rec: T = match entry {
+            Ok(r) => r,
+            Err(e) => return Err(format!("processing {}; {}", fname, e).into()),
+        };
         rec_a.push(rec);
     }
 
