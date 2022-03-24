@@ -3,12 +3,11 @@ mod find_dropped_txs;
 use find_dropped_txs::find_dropped_transactions;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("main:+");
-    find_dropped_transactions(
-        "data/b.com/b.com.uc.473.2019-2021.tbr.csv",
-        "data/b.com/b.com.uc.473.2019-2021.tber.csv",
-    )?;
+    let tbr_fname = "testdata/3.tbr.csv";
+    let tber_fname = "testdata/3.tber.csv";
 
-    println!("main:- Ok");
+    let dropped = find_dropped_transactions(tbr_fname, tber_fname)?;
+    println!("Dropped: {dropped}");
+
     Ok(())
 }

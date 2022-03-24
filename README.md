@@ -1,13 +1,13 @@
-# Find dropped transactions
+# TaxBit dropped transactions
 
-![ci-stable](https://github.com/winksaville/find-dropped-txs/actions/workflows/ci-stable.yml/badge.svg)
-![ci-nightly](https://github.com/winksaville/find-dropped-txs/actions/workflows/ci-nightly.yml/badge.svg)
-[![codecov](https://codecov.io/gh/winksaville/find-dropped-txs/branch/main/graph/badge.svg?token=cowZtK1KK1)](https://codecov.io/gh/winksaville/find-dropped-txs)
+![ci-stable](https://github.com/winksaville/taxbit-dropped-txs/actions/workflows/ci-stable.yml/badge.svg)
+![ci-nightly](https://github.com/winksaville/taxbit-dropped-txs/actions/workflows/ci-nightly.yml/badge.svg)
+[![codecov](https://codecov.io/gh/winksaville/taxbit-dropped-txs/branch/main/graph/badge.svg?token=cowZtK1KK1)](https://codecov.io/gh/winksaville/taxbit-dropped-txs)
+
+Determine what transactions where dropped by TaxBit after uploading a CSV file.
 
 > **Note: In no case can the authors of this program be held responsible
 > for any damanges or monetary losses.**
-
-Tries to find transactions TaxBit has dropped after csv files have been uploaded.
 
 ## License
 
