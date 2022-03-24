@@ -40,9 +40,9 @@ pub fn find_dropped_transactions(
     let tber_a = read_csv::<TaxBitExportRec>(tber_fname)?;
 
     let dropped = tbr_a.len() - tber_a.len();
-    dbg!(tbr_a.len());
-    dbg!(tber_a.len());
-    dbg!(dropped);
+    //dbg!(tbr_a.len());
+    //dbg!(tber_a.len());
+    //dbg!(dropped);
 
     Ok(dropped)
 }

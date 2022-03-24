@@ -1,12 +1,20 @@
 mod find_dropped_txs;
 
+use std::env;
+
 use find_dropped_txs::find_dropped_transactions;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let tbr_fname = "testdata/3.tbr.csv";
-    let tber_fname = "testdata/3.tber.csv";
+const APP_NAME: &str = "taxbit-dropped-txs";
 
-    let dropped = find_dropped_transactions(tbr_fname, tber_fname)?;
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let args: Vec<String> = env::args().collect();
+    if args.len() != 3 {
+        eprintln!("Usage: {} <tbr.csv> <tber.csv>", APP_NAME);
+
+        std::process::exit(1);
+    }
+
+    let dropped = find_dropped_transactions(&args[1], &args[2])?;
     println!("Dropped: {dropped}");
 
     Ok(())
