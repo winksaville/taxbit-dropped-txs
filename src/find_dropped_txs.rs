@@ -2,6 +2,7 @@ use serde::Deserialize;
 use std::{fs::File, io::BufReader};
 use taxbit_export_rec::TaxBitExportRec;
 use taxbitrec::TaxBitRec;
+//use rust_decimal_macros::dec;
 
 fn open_file(fname: &str) -> Result<File, Box<dyn std::error::Error>> {
     Ok(match File::open(fname) {
@@ -39,10 +40,71 @@ pub fn find_dropped_transactions(
     tbr_fname: &str,
     tber_fname: &str,
 ) -> Result<usize, Box<dyn std::error::Error>> {
-    let tbr_a = read_csv::<TaxBitRec>(tbr_fname)?;
-    let tber_a = read_csv::<TaxBitExportRec>(tber_fname)?;
+    let mut tbr_a = read_csv::<TaxBitRec>(tbr_fname)?;
+    let mut tber_a = read_csv::<TaxBitExportRec>(tber_fname)?;
 
-    let dropped = tbr_a.len() - tber_a.len();
+    // True for now if there has been no editing
+    assert!(tbr_a.len() >= tber_a.len());
+
+    // Sort the arrays to be sure time's are ordered
+    tbr_a.sort();
+    tber_a.sort();
+
+    let tbr_a = tbr_a;
+    let tber_a = tber_a;
+
+    let mut dropped = 0usize;
+    let mut tber_iter = tber_a.iter();
+    let mut tber_cur = tber_iter.next();
+    if tbr_a.len() > tber_a.len() {
+        for (rec_num, tbr) in tbr_a.iter().enumerate() {
+            print!("{rec_num} tbr : {}", tbr);
+            if let Some(tber) = tber_cur {
+                if tbr.time != tber.time {
+                    //println!(" Dropped see tber: {}", tber);
+                    println!(" Dropped");
+                    dropped += 1;
+                } else {
+                    //println!();
+                    //print!("{rec_num} tber: {} CHECKING", tber);
+                    //io::stdout().flush().unwrap();
+
+                    // Since ATM the files I'm checking only have income
+                    // only received values are present. And it turns out
+                    // TaxBit is using different tickers for some.
+                    let tbr_rc_str = match tbr.received_currency.as_str() {
+                        "ONG" => "ONGAS",
+                        "NANO" => "XNO",
+                        "COS" => "CONT",
+                        "YOYO" => "YOYOW",
+                        "BQX" => "VGX",
+                        "RDN" => "RDNN",
+                        "HOT" => "HOLO",
+                        "MDT" => "MSDT",
+                        "AVA" => "AVALA",
+                        _ => &tbr.received_currency,
+                    };
+                    assert_eq!(tbr_rc_str, &tber.received_currency);
+                    assert_eq!(tbr.received_quantity, tber.received_quantity);
+
+                    // For the moment these will be empty
+                    assert!(tbr.sent_currency.is_empty());
+                    assert_eq!(tbr.sent_currency, tber.sent_currency);
+                    assert!(tbr.sent_quantity.is_none());
+                    assert_eq!(tbr.sent_quantity, tber.sent_quantity);
+
+                    assert!(tbr.fee_currency.is_empty());
+                    assert_eq!(tbr.fee_currency, tber.fee_currency);
+                    assert!(tbr.fee_quantity.is_none());
+                    assert_eq!(tbr.fee_quantity, tber.fee_amount);
+
+                    println!();
+                    tber_cur = tber_iter.next();
+                }
+            }
+        }
+        println!();
+    }
     //dbg!(tbr_a.len());
     //dbg!(tber_a.len());
     //dbg!(dropped);
