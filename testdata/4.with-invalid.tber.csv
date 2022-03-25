@@ -1,5 +1,0 @@
-Date,Transaction Type,Received Quantity,Received Currency,Sent Quantity,Sent Currency,Fee Currency,Fee Amount,Market Value,Source,Internal Transfer,External ID
-2019-05-21T21:39:50.000Z,Income,4.4238,BTT,,,,,0.005025436800000001,Binance,FALSE,2aed857d-3fef-401c-9de6-034f8981d5b6
-2019-05-23T07:54:20.000Z,Income,0.2916,MATIC,,,,,0.00836892,Binance,FALSE,98b1dcf1-c376-49a5-80fb-42f6fdc51efe
-2019-05-24T09:50:15.000Z,Income,0.003,THETA,,,,,0.0003627,Binance,FALSE,8ea950de-63ef-4a20-ab15-a459d568ffba
-2020-12-08T14:35:35.000Z,Invalid,0.0009676,CREAM,,,,,,Binance,FALSE,05a84f6f-0bb9-4961-a94a-3860ef5e947d

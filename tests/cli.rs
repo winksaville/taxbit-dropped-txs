@@ -44,7 +44,7 @@ fn test_4_recs() -> Result<(), Box<dyn Error>> {
     let mut cmd = Command::cargo_bin(APP_NAME)?;
 
     cmd.arg("testdata/4.tbr.csv");
-    cmd.arg("testdata/4.with-invalid.tber.csv");
+    cmd.arg("testdata/4.with-1-invalid.tber.csv");
 
     // This should probably be 1 eventually
     cmd.assert()
