@@ -87,7 +87,7 @@ dependencies = [
 [[package]]
 name = "dec-utils"
 version = "0.1.0"
-source = "git+https://github.com/winksaville/dec-utils#91e04f895c1eed6c083baee6b715a9005daf5d7c"
+source = "git+https://github.com/winksaville/dec-utils#f195fd256bfe65e4c5075a61d3b4a71c5f65c46e"
 dependencies = [
  "rust_decimal",
  "rust_decimal_macros",
@@ -355,7 +355,7 @@ dependencies = [
 
 [[package]]
 name = "taxbit-dropped-txs"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "assert_cmd",
  "csv",
