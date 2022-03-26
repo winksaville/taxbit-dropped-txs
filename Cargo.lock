@@ -354,18 +354,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "taxbit-dropped-txs"
-version = "0.4.0"
-dependencies = [
- "assert_cmd",
- "csv",
- "predicates",
- "serde",
- "taxbit-export-rec",
- "taxbitrec",
-]
-
-[[package]]
 name = "taxbit-export-rec"
 version = "0.3.0"
 source = "git+https://github.com/winksaville/taxbit-export-rec#3b5d86194051020c16eb08c88216dae6ced48167"
@@ -379,6 +367,18 @@ dependencies = [
  "serde_utc_time_ms",
  "taxbitrec",
  "time_ms_conversions",
+]
+
+[[package]]
+name = "taxbit-odd-txs"
+version = "0.5.0"
+dependencies = [
+ "assert_cmd",
+ "csv",
+ "predicates",
+ "serde",
+ "taxbit-export-rec",
+ "taxbitrec",
 ]
 
 [[package]]

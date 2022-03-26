@@ -1,8 +1,8 @@
-# TaxBit dropped transactions
+# TaxBit odd transactions
 
-![ci-stable](https://github.com/winksaville/taxbit-dropped-txs/actions/workflows/ci-stable.yml/badge.svg)
-![ci-nightly](https://github.com/winksaville/taxbit-dropped-txs/actions/workflows/ci-nightly.yml/badge.svg)
-[![codecov](https://codecov.io/gh/winksaville/taxbit-dropped-txs/branch/main/graph/badge.svg?token=cowZtK1KK1)](https://codecov.io/gh/winksaville/taxbit-dropped-txs)
+![ci-stable](https://github.com/winksaville/taxbit-odd-txs/actions/workflows/ci-stable.yml/badge.svg)
+![ci-nightly](https://github.com/winksaville/taxbit-odd-txs/actions/workflows/ci-nightly.yml/badge.svg)
+[![codecov](https://codecov.io/gh/winksaville/taxbit-odd-txs/branch/main/graph/badge.svg?token=cowZtK1KK1)](https://codecov.io/gh/winksaville/taxbit-odd-txs)
 
 Determine what transactions where dropped by TaxBit after uploading a CSV file.
 

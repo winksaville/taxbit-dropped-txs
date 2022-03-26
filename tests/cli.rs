@@ -4,7 +4,7 @@ use std::error::Error;
 use std::process::Command;
 
 // Should be the same as APP_NAME in main
-const APP_NAME: &str = "taxbit-dropped-txs";
+const APP_NAME: &str = "taxbit-odd-txs";
 
 // If tarpaulin starts failing during github Actions disable
 // by uncommenting #[cfg(not(tarpauling))]. This will reduce
@@ -33,7 +33,9 @@ fn test_3_recs() -> Result<(), Box<dyn Error>> {
 
     cmd.assert()
         .code(predicate::eq(0))
-        .stdout(predicate::str::starts_with(format!("Dropped: 0")));
+        .stdout(predicate::str::contains("Dropped: 0"))
+        .stdout(predicate::str::contains("Invalid: 0"))
+        .stdout(predicate::str::contains("Currency Changed: 0"));
 
     Ok(())
 }
@@ -49,7 +51,27 @@ fn test_4_recs() -> Result<(), Box<dyn Error>> {
     // This should probably be 1 eventually
     cmd.assert()
         .code(predicate::eq(0))
-        .stdout(predicate::str::starts_with(format!("Dropped: 0")));
+        .stdout(predicate::str::contains("Dropped: 0"))
+        .stdout(predicate::str::contains("Invalid: 1"))
+        .stdout(predicate::str::contains("Currency Changed: 0"));
+
+    Ok(())
+}
+
+#[test]
+//#[cfg(not(tarpaulin))]
+fn test_473_recs() -> Result<(), Box<dyn Error>> {
+    let mut cmd = Command::cargo_bin(APP_NAME)?;
+
+    cmd.arg("testdata/473.tbr.csv");
+    cmd.arg("testdata/473.tber.csv");
+
+    // This should probably be 1 eventually
+    cmd.assert()
+        .code(predicate::eq(0))
+        .stdout(predicate::str::contains("Dropped: 31"))
+        .stdout(predicate::str::contains("Invalid: 1"))
+        .stdout(predicate::str::contains("Currency Changed: 9"));
 
     Ok(())
 }

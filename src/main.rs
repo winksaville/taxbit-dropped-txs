@@ -1,10 +1,10 @@
-mod find_dropped_txs;
+mod find_odd_txs;
 
 use std::env;
 
-use find_dropped_txs::find_dropped_transactions;
+use find_odd_txs::find_odd_txs;
 
-const APP_NAME: &str = "taxbit-dropped-txs";
+const APP_NAME: &str = "taxbit-odd-txs";
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
@@ -14,8 +14,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::process::exit(1);
     }
 
-    let dropped = find_dropped_transactions(&args[1], &args[2])?;
-    println!("Dropped: {dropped}");
+    let odd_transactions = find_odd_txs(&args[1], &args[2])?;
+    println!("         Dropped: {}", odd_transactions.dropped);
+    println!("         Invalid: {}", odd_transactions.invalid);
+    println!("Currency Changed: {}", odd_transactions.currency_changed);
 
     Ok(())
 }
