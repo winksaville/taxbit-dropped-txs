@@ -1,5 +1,5 @@
 Date and Time,Transaction Type,Sent Quantity,Sent Currency,Sending Source,Received Quantity,Received Currency,Receiving Destination,Fee,Fee Currency,Exchange Transaction ID,Blockchain Transaction Hash
 2019-05-21T21:39:50.000Z,Income,,,,4.4238,BTT,Binance,,,,
-2019-05-23T07:54:20.000Z,Income,,,,0.2916,MATIC,Binance,,,,
-2019-05-24T09:50:15.000Z,Income,,,,0.003,THETA,Binance,,,,
+2019-07-29T11:23:32.000Z,Income,,,,0.0338,ONG,Binance,,,,
+2020-01-22T12:43:02.000Z,Income,,,,0.00223642,TRY,Binance,,,,
 2020-12-08T14:35:35.000Z,Income,,,,0.0009676,CREAM,Binance,,,,

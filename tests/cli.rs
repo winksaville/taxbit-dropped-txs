@@ -46,14 +46,14 @@ fn test_4_recs() -> Result<(), Box<dyn Error>> {
     let mut cmd = Command::cargo_bin(APP_NAME)?;
 
     cmd.arg("testdata/4.tbr.csv");
-    cmd.arg("testdata/4.with-1-invalid.tber.csv");
+    cmd.arg("testdata/4.tber.csv");
 
     // This should probably be 1 eventually
     cmd.assert()
         .code(predicate::eq(0))
-        .stdout(predicate::str::contains("Dropped: 0"))
+        .stdout(predicate::str::contains("Dropped: 1"))
         .stdout(predicate::str::contains("Invalid: 1"))
-        .stdout(predicate::str::contains("Currency Changed: 0"));
+        .stdout(predicate::str::contains("Currency Changed: 1"));
 
     Ok(())
 }

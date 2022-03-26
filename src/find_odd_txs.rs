@@ -73,18 +73,19 @@ pub fn find_odd_txs(
     let mut odd_transactions = OddTxs::new();
     let mut tber_iter = tber_a.iter();
     let mut tber_cur = tber_iter.next();
-    for (rec_num, tbr) in tbr_a.iter().enumerate() {
+    for (idx, tbr) in tbr_a.iter().enumerate() {
+        let rec_num = idx + 1;
         print!("{rec_num} tbr : {}", tbr);
         if let Some(tber) = tber_cur {
-            if tber.type_txs == TaxBitRecType::Invalid {
-                print!(" Invalid");
-                odd_transactions.invalid += 1;
-            }
             if tbr.time != tber.time {
                 //println!(" Dropped see tber: {}", tber);
                 print!(" Dropped");
                 odd_transactions.dropped += 1;
             } else {
+                if tber.type_txs == TaxBitRecType::Invalid {
+                    print!(" Invalid");
+                    odd_transactions.invalid += 1;
+                }
                 //println!();
                 //print!("{rec_num} tber: {} CHECKING", tber);
                 //io::stdout().flush().unwrap();
@@ -156,12 +157,11 @@ mod test {
 
     #[test]
     fn test_find_odd_transactions_with_invalid() {
-        let odd_transactions =
-            find_odd_txs("testdata/4.tbr.csv", "testdata/4.with-1-invalid.tber.csv").unwrap();
+        let odd_transactions = find_odd_txs("testdata/4.tbr.csv", "testdata/4.tber.csv").unwrap();
 
-        assert_eq!(odd_transactions.dropped, 0);
+        assert_eq!(odd_transactions.dropped, 1);
         assert_eq!(odd_transactions.invalid, 1);
-        assert_eq!(odd_transactions.currency_changed, 0);
+        assert_eq!(odd_transactions.currency_changed, 1);
     }
 
     #[test]
