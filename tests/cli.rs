@@ -69,7 +69,7 @@ fn test_473_recs() -> Result<(), Box<dyn Error>> {
     // This should probably be 1 eventually
     cmd.assert()
         .code(predicate::eq(0))
-        .stdout(predicate::str::contains("Dropped: 31"))
+        .stdout(predicate::str::contains("Dropped: 30"))
         .stdout(predicate::str::contains("Invalid: 1"))
         .stdout(predicate::str::contains("Currency Changed: 9"));
 

@@ -169,7 +169,7 @@ mod test {
         let odd_transactions =
             find_odd_txs("testdata/473.tbr.csv", "testdata/473.tber.csv").unwrap();
 
-        assert_eq!(odd_transactions.dropped, 31);
+        assert_eq!(odd_transactions.dropped, 30);
         assert_eq!(odd_transactions.invalid, 1);
         assert_eq!(odd_transactions.currency_changed, 9);
     }
