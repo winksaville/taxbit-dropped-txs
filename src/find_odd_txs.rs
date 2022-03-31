@@ -76,56 +76,63 @@ pub fn find_odd_txs(
     for (idx, tbr) in tbr_a.iter().enumerate() {
         let rec_num = idx + 1;
         print!("{rec_num} tbr : {}", tbr);
-        if let Some(tber) = tber_cur {
-            if tbr.time != tber.time {
-                //println!(" Dropped see tber: {}", tber);
+        match tber_cur {
+            None => {
                 print!(" Dropped");
+                //print!(", no more tber entries");
                 odd_transactions.dropped += 1;
-            } else {
-                if tber.type_txs == TaxBitRecType::Invalid {
-                    print!(" Invalid");
-                    odd_transactions.invalid += 1;
-                }
-                //println!();
-                //print!("{rec_num} tber: {} CHECKING", tber);
-                //io::stdout().flush().unwrap();
-
-                // Since ATM the files I'm checking only have income
-                // only received values are present. And it turns out
-                // TaxBit is using different tickers for some.
-                let tbr_rc_str = match tbr.received_currency.as_str() {
-                    "ONG" => "ONGAS",
-                    "NANO" => "XNO",
-                    "COS" => "CONT",
-                    "YOYO" => "YOYOW",
-                    "BQX" => "VGX",
-                    "RDN" => "RDNN",
-                    "HOT" => "HOLO",
-                    "MDT" => "MSDT",
-                    "AVA" => "AVALA",
-                    _ => &tbr.received_currency,
-                };
-                if tbr_rc_str != tbr.received_currency {
-                    print!(" Currency Changed: {}", tbr_rc_str);
-                    odd_transactions.currency_changed += 1;
-                }
-                assert_eq!(tbr_rc_str, &tber.received_currency);
-                assert_eq!(tbr.received_quantity, tber.received_quantity);
-
-                // For the moment these will be empty
-                assert!(tbr.sent_currency.is_empty());
-                assert_eq!(tbr.sent_currency, tber.sent_currency);
-                assert!(tbr.sent_quantity.is_none());
-                assert_eq!(tbr.sent_quantity, tber.sent_quantity);
-
-                assert!(tbr.fee_currency.is_empty());
-                assert_eq!(tbr.fee_currency, tber.fee_currency);
-                assert!(tbr.fee_quantity.is_none());
-                assert_eq!(tbr.fee_quantity, tber.fee_amount);
-
-                tber_cur = tber_iter.next();
             }
-            println!();
+            Some(tber) => {
+                if tbr.time != tber.time {
+                    print!(" Dropped");
+                    //print!(", see tber_cur: {:?}", tber_cur);
+                    odd_transactions.dropped += 1;
+                } else {
+                    if tber.type_txs == TaxBitRecType::Invalid {
+                        print!(" Invalid");
+                        odd_transactions.invalid += 1;
+                    }
+                    //println!();
+                    //print!("{rec_num} tber: {} CHECKING", tber);
+                    //io::stdout().flush().unwrap();
+
+                    // Since ATM the files I'm checking only have income
+                    // only received values are present. And it turns out
+                    // TaxBit is using different tickers for some.
+                    let tbr_rc_str = match tbr.received_currency.as_str() {
+                        "ONG" => "ONGAS",
+                        "NANO" => "XNO",
+                        "COS" => "CONT",
+                        "YOYO" => "YOYOW",
+                        "BQX" => "VGX",
+                        "RDN" => "RDNN",
+                        "HOT" => "HOLO",
+                        "MDT" => "MSDT",
+                        "AVA" => "AVALA",
+                        _ => &tbr.received_currency,
+                    };
+                    if tbr_rc_str != tbr.received_currency {
+                        print!(" Currency Changed: {}", tbr_rc_str);
+                        odd_transactions.currency_changed += 1;
+                    }
+                    assert_eq!(tbr_rc_str, &tber.received_currency);
+                    assert_eq!(tbr.received_quantity, tber.received_quantity);
+
+                    // For the moment these will be empty
+                    assert!(tbr.sent_currency.is_empty());
+                    assert_eq!(tbr.sent_currency, tber.sent_currency);
+                    assert!(tbr.sent_quantity.is_none());
+                    assert_eq!(tbr.sent_quantity, tber.sent_quantity);
+
+                    assert!(tbr.fee_currency.is_empty());
+                    assert_eq!(tbr.fee_currency, tber.fee_currency);
+                    assert!(tbr.fee_quantity.is_none());
+                    assert_eq!(tbr.fee_quantity, tber.fee_amount);
+
+                    tber_cur = tber_iter.next();
+                }
+                println!();
+            }
         }
     }
     println!();
@@ -169,7 +176,7 @@ mod test {
         let odd_transactions =
             find_odd_txs("testdata/473.tbr.csv", "testdata/473.tber.csv").unwrap();
 
-        assert_eq!(odd_transactions.dropped, 30);
+        assert_eq!(odd_transactions.dropped, 31);
         assert_eq!(odd_transactions.invalid, 1);
         assert_eq!(odd_transactions.currency_changed, 9);
     }
