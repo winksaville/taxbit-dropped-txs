@@ -1,0 +1,5 @@
+[test_config]
+follow_exec = true
+ignore-tests = true
+verbose = false
+
