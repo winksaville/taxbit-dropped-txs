@@ -115,19 +115,19 @@ pub fn find_odd_txs(
                         print!(" Currency Changed: {}", tbr_rc_str);
                         odd_transactions.currency_changed += 1;
                     }
-                    assert_eq!(tbr_rc_str, &tber.received_currency);
-                    assert_eq!(tbr.received_quantity, tber.received_quantity);
+                    //assert_eq!(tbr_rc_str, &tber.received_currency);
+                    //assert_eq!(tbr.received_quantity, tber.received_quantity);
 
-                    // For the moment these will be empty
-                    assert!(tbr.sent_currency.is_empty());
-                    assert_eq!(tbr.sent_currency, tber.sent_currency);
-                    assert!(tbr.sent_quantity.is_none());
-                    assert_eq!(tbr.sent_quantity, tber.sent_quantity);
+                    //// For the moment these will be empty
+                    //assert!(tbr.sent_currency.is_empty());
+                    //assert_eq!(tbr.sent_currency, tber.sent_currency);
+                    //assert!(tbr.sent_quantity.is_none());
+                    //assert_eq!(tbr.sent_quantity, tber.sent_quantity);
 
-                    assert!(tbr.fee_currency.is_empty());
-                    assert_eq!(tbr.fee_currency, tber.fee_currency);
-                    assert!(tbr.fee_quantity.is_none());
-                    assert_eq!(tbr.fee_quantity, tber.fee_amount);
+                    //assert!(tbr.fee_currency.is_empty());
+                    //assert_eq!(tbr.fee_currency, tber.fee_currency);
+                    //assert!(tbr.fee_quantity.is_none());
+                    //assert_eq!(tbr.fee_quantity, tber.fee_amount);
 
                     tber_cur = tber_iter.next();
                 }
